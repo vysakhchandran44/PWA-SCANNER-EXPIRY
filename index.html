@@ -3,858 +3,553 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
-  <!-- PWA Theme - Light -->
-  <meta name="theme-color" content="#FFFFFF">
-  
-  <!-- iOS PWA -->
+  <meta name="theme-color" content="#0a0a0a">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="BOOTS PHARMACY">
-  
-  <title>BOOTS PHARMACY – Backwall Tracker</title>
-  
-  <!-- Manifest + Icons -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <title>Expiry Tracker</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="icon" type="image/png" href="icon-192.png">
-  
-  <!-- Fonts -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- Barcode Scanner Library -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-  
   <style>
-    /* ========================================
-       LIGHT THEME - Clean & Modern
-       ======================================== */
     :root {
-      /* Light Backgrounds */
-      --bg-main: #F8FAFC;
-      --bg-card: #FFFFFF;
-      --bg-surface: #F1F5F9;
-      --bg-elevated: #E2E8F0;
-      --bg-hover: #CBD5E1;
-      
-      /* Accent Colors - Coral/Teal/Yellow */
-      --coral: #FF6B6B;
-      --coral-light: #FEE2E2;
-      --coral-dark: #DC2626;
-      
-      --teal: #14B8A6;
-      --teal-light: #CCFBF1;
-      --teal-dark: #0D9488;
-      
-      --yellow: #F59E0B;
-      --yellow-light: #FEF3C7;
-      
-      --blue: #3B82F6;
-      --blue-light: #DBEAFE;
-      
-      /* Primary Accent */
-      --accent-primary: var(--teal);
-      --accent-primary-hover: var(--teal-dark);
-      --accent-secondary: var(--coral);
-      
-      /* Borders */
-      --border-light: #E2E8F0;
-      --border-default: #CBD5E1;
-      --border-strong: #94A3B8;
-      
-      /* Text Colors */
-      --text-primary: #1E293B;
-      --text-secondary: #475569;
-      --text-muted: #94A3B8;
-      --text-accent: var(--teal-dark);
-      
-      /* Status Colors */
-      --success: #10B981;
-      --success-bg: #D1FAE5;
-      --success-border: #6EE7B7;
-      --warning: #F59E0B;
-      --warning-bg: #FEF3C7;
-      --warning-border: #FCD34D;
-      --danger: #EF4444;
-      --danger-bg: #FEE2E2;
-      --danger-border: #FCA5A5;
-      
-      /* Typography */
-      --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-      
-      /* Spacing */
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 16px;
-      --space-lg: 24px;
-      --space-xl: 32px;
-      
-      /* Borders */
+      --primary: #00bcd4;
+      --primary-dark: #00838f;
+      --primary-light: #4dd0e1;
+      --gradient-start: #00bcd4;
+      --gradient-end: #26c6da;
+      --gradient-dark: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+      --bg-dark: #0a0a0a;
+      --bg-card: #111111;
+      --bg-card-hover: #1a1a1a;
+      --bg-input: #1c1c1c;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      --border-color: #2a2a2a;
+      --success: #00e676;
+      --warning: #ffab00;
+      --danger: #ff5252;
+      --expired: #ff1744;
+      --expiring: #ff9100;
+      --ok: #00e676;
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-xl: 24px;
-      --radius-full: 9999px;
-      
-      /* Shadows */
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-      
-      /* Transitions */
-      --transition-fast: 150ms ease;
-      --transition-default: 250ms ease;
-      
-      /* Layout */
-      --header-height: 60px;
-      --nav-height: 70px;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --shadow: 0 4px 24px rgba(0, 188, 212, 0.15);
+      --shadow-lg: 0 8px 40px rgba(0, 188, 212, 0.2);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ========================================
-       RESET & BASE
-       ======================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    * {
       margin: 0;
       padding: 0;
-    }
-
-    html {
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      font-family: var(--font-display);
-      background: var(--bg-main);
-      color: var(--text-primary);
-      line-height: 1.5;
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-surface); }
-    ::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: var(--radius-full); }
-
-    /* ========================================
-       APP SHELL
-       ======================================== */
-    .app-container {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      max-width: 480px;
-      margin: 0 auto;
-      background: var(--bg-main);
-    }
-
-    /* Header */
-    .app-header {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      height: var(--header-height);
-      padding-top: var(--safe-top);
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border-light);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-left: var(--space-md);
-      padding-right: var(--space-md);
-      z-index: 100;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: #1a4a8d;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    html, body {
+      height: 100%;
       overflow: hidden;
     }
 
-    .logo-text {
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== SPLASH SCREEN ========== */
+    #splashScreen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    .logo-name {
-      font-size: 1rem;
+    #splashScreen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .splash-logo {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .splash-pill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 60px;
+      animation: pillPulse 2s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    @keyframes pillPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 188, 212, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(0, 188, 212, 0); }
+    }
+
+    .splash-title {
+      font-size: 28px;
       font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      animation: fadeInUp 0.8s ease 0.3s both;
     }
 
-    .logo-branch {
-      font-size: 0.7rem;
+    .splash-tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      animation: fadeInUp 0.8s ease 0.5s both;
+    }
+
+    .splash-brand {
+      font-size: 12px;
       color: var(--text-muted);
-      font-weight: 500;
+      animation: fadeInUp 0.8s ease 0.7s both;
+    }
+
+    .splash-brand span {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .splash-loader {
+      width: 200px;
+      height: 3px;
+      background: var(--bg-card);
+      border-radius: 3px;
+      margin-top: 32px;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease 0.9s both;
+    }
+
+    .splash-loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 3px;
+      animation: loadProgress 2s ease-out forwards;
+    }
+
+    @keyframes loadProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== APP CONTAINER ========== */
+    #app {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #app.show {
+      opacity: 1;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      background: linear-gradient(135deg, rgba(0, 188, 212, 0.1) 0%, rgba(38, 198, 218, 0.05) 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary) 0%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .header-actions {
       display: flex;
-      align-items: center;
-      gap: var(--space-sm);
+      gap: 8px;
     }
 
     .header-btn {
       width: 40px;
       height: 40px;
-      border-radius: var(--radius-md);
       border: none;
-      background: var(--bg-surface);
-      color: var(--text-secondary);
-      font-size: 1.1rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 18px;
       cursor: pointer;
+      transition: var(--transition);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all var(--transition-fast);
     }
 
     .header-btn:active {
-      background: var(--bg-elevated);
       transform: scale(0.95);
+      background: var(--primary);
     }
 
-    .online-status {
-      font-size: 0.65rem;
-      padding: 4px 8px;
-      border-radius: var(--radius-full);
-      font-weight: 600;
-    }
-
-    .online-status.online {
-      background: var(--success-bg);
-      color: var(--success);
-    }
-
-    .online-status.offline {
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    /* Main Content */
-    .app-main {
+    /* ========== MAIN CONTENT ========== */
+    .main-content {
       flex: 1;
-      padding-top: calc(var(--header-height) + var(--safe-top));
-      padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + var(--space-md));
       overflow-y: auto;
+      overflow-x: hidden;
+      padding: 16px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
 
-    /* Page */
-    .page {
-      display: none;
-      padding: var(--space-md);
-      animation: fadeIn 0.2s ease;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      height: var(--nav-height);
-      padding-bottom: var(--safe-bottom);
+    /* ========== MANUAL INPUT SECTION ========== */
+    .input-section {
       background: var(--bg-card);
-      border-top: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .input-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
-      justify-content: space-around;
-      z-index: 100;
+      gap: 8px;
     }
 
-    .nav-item {
+    .barcode-input-wrapper {
+      position: relative;
+    }
+
+    .barcode-input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-size: 16px;
+      color: var(--text-primary);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .barcode-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.2);
+    }
+
+    .barcode-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .input-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       gap: 4px;
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-md);
-      color: var(--text-muted);
-      text-decoration: none;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      border: none;
-      background: transparent;
     }
 
-    .nav-item.active {
-      color: var(--accent-primary);
-    }
-
-    .nav-item:active {
-      background: var(--bg-surface);
-    }
-
-    .nav-icon {
-      font-size: 1.4rem;
-    }
-
-    .nav-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    /* ========================================
-       CARDS & COMPONENTS
-       ======================================== */
-    .card {
+    /* ========== SCANNER SECTION ========== */
+    .scanner-section {
       background: var(--bg-card);
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border-light);
-      padding: var(--space-md);
-      margin-bottom: var(--space-md);
-      box-shadow: var(--shadow-sm);
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
     }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: var(--space-md);
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
+    .scanner-toggle {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border: none;
       border-radius: var(--radius-md);
-      font-size: 0.875rem;
+      color: #000;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      border: none;
-      transition: all var(--transition-fast);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .btn-primary {
-      background: var(--accent-primary);
-      color: white;
-    }
-
-    .btn-primary:active {
-      background: var(--accent-primary-hover);
+    .scanner-toggle:active {
       transform: scale(0.98);
     }
 
-    .btn-secondary {
-      background: var(--bg-surface);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-default);
-    }
-
-    .btn-secondary:active {
-      background: var(--bg-elevated);
-    }
-
-    .btn-danger {
+    .scanner-toggle.active {
       background: var(--danger);
-      color: white;
+      color: #fff;
     }
 
-    .btn-coral {
-      background: var(--coral);
-      color: white;
-    }
-
-    .btn-large {
-      padding: var(--space-md) var(--space-lg);
-      font-size: 1rem;
-      border-radius: var(--radius-lg);
-      width: 100%;
-    }
-
-    .btn-icon {
-      width: 44px;
-      height: 44px;
-      padding: 0;
-      font-size: 1.2rem;
-    }
-
-    /* Form Elements */
-    .form-group {
-      margin-bottom: var(--space-md);
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: var(--space-xs);
-    }
-
-    .form-input, .form-textarea {
-      width: 100%;
-      padding: var(--space-sm) var(--space-md);
-      border: 1px solid var(--border-default);
+    #scannerContainer {
+      display: none;
+      margin-top: 16px;
       border-radius: var(--radius-md);
-      font-size: 1rem;
-      font-family: var(--font-mono);
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      transition: all var(--transition-fast);
-    }
-
-    .form-input:focus, .form-textarea:focus {
-      outline: none;
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 0 3px var(--teal-light);
-    }
-
-    .form-textarea {
-      min-height: 120px;
-      resize: vertical;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
-
-    /* ========================================
-       HOME PAGE
-       ======================================== */
-    .hero {
-      text-align: center;
-      padding: var(--space-xl) var(--space-md);
-      background: linear-gradient(135deg, var(--teal-light) 0%, var(--coral-light) 100%);
-      border-radius: var(--radius-xl);
-      margin-bottom: var(--space-lg);
-    }
-
-    .hero-icon {
-      font-size: 3rem;
-      margin-bottom: var(--space-md);
-    }
-
-    .hero-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: var(--space-sm);
-    }
-
-    .hero-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
-      margin-bottom: var(--space-lg);
-    }
-
-    .quick-action {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-lg);
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-light);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .quick-action:active {
-      transform: scale(0.98);
-      background: var(--bg-surface);
-    }
-
-    .quick-action-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-
-    .quick-action-icon.coral { background: var(--coral-light); }
-    .quick-action-icon.teal { background: var(--teal-light); }
-    .quick-action-icon.yellow { background: var(--yellow-light); }
-    .quick-action-icon.blue { background: var(--blue-light); }
-
-    .quick-action-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    /* Stats Row */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-sm);
-      margin-bottom: var(--space-lg);
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: var(--space-md);
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-light);
-    }
-
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent-primary);
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* Recent Items */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: var(--space-md);
-    }
-
-    .section-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .section-link {
-      font-size: 0.8rem;
-      color: var(--accent-primary);
-      text-decoration: none;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* ========================================
-       SCANNER PAGE
-       ======================================== */
-    .scanner-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--bg-surface);
-      border-radius: var(--radius-xl);
       overflow: hidden;
-      margin-bottom: var(--space-md);
-      border: 2px solid var(--border-default);
+      position: relative;
+    }
+
+    #scannerContainer.show {
+      display: block;
     }
 
     #reader {
-      width: 100% !important;
-      height: 100% !important;
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
     }
 
     #reader video {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      border-radius: var(--radius-lg);
-    }
-
-    #reader__dashboard_section,
-    #reader__camera_selection,
-    #html5-qrcode-button-camera-permission,
-    #reader__dashboard_section_csr,
-    #reader__dashboard_section_swaplink {
-      display: none !important;
+      border-radius: var(--radius-md);
     }
 
     .scanner-overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
-      z-index: 10;
     }
 
     .scanner-frame {
       width: 70%;
       aspect-ratio: 1;
-      border: 3px solid var(--accent-primary);
+      border: 3px solid var(--primary);
       border-radius: var(--radius-lg);
-      position: relative;
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+      animation: scanPulse 2s ease-in-out infinite;
     }
 
-    .scanner-frame::before,
-    .scanner-frame::after {
-      content: '';
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-color: var(--coral);
-      border-style: solid;
+    @keyframes scanPulse {
+      0%, 100% { border-color: var(--primary); }
+      50% { border-color: var(--primary-light); }
     }
 
-    .scanner-frame::before {
-      top: -3px;
-      left: -3px;
-      border-width: 4px 0 0 4px;
-      border-radius: var(--radius-sm) 0 0 0;
+    /* ========== STATS WIDGETS ========== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
-    .scanner-frame::after {
-      bottom: -3px;
-      right: -3px;
-      border-width: 0 4px 4px 0;
-      border-radius: 0 0 var(--radius-sm) 0;
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
     }
 
-    .scanner-hint {
-      position: absolute;
-      bottom: var(--space-lg);
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-full);
-      font-size: 0.75rem;
+    .stat-card:active {
+      transform: scale(0.98);
+    }
+
+    .stat-card.expired {
+      border-color: var(--expired);
+      background: linear-gradient(135deg, rgba(255, 23, 68, 0.1) 0%, transparent 100%);
+    }
+
+    .stat-card.expiring {
+      border-color: var(--expiring);
+      background: linear-gradient(135deg, rgba(255, 145, 0, 0.1) 0%, transparent 100%);
+    }
+
+    .stat-card.ok {
+      border-color: var(--ok);
+      background: linear-gradient(135deg, rgba(0, 230, 118, 0.1) 0%, transparent 100%);
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-card.expired .stat-value { color: var(--expired); }
+    .stat-card.expiring .stat-value { color: var(--expiring); }
+    .stat-card.ok .stat-value { color: var(--ok); }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ========== RECENT ITEMS ========== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-action {
+      font-size: 13px;
+      color: var(--primary);
+      background: none;
+      border: none;
+      cursor: pointer;
       font-weight: 500;
     }
 
-    .scanner-controls {
+    .items-list {
       display: flex;
-      gap: var(--space-sm);
-      margin-bottom: var(--space-md);
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .scanner-controls .btn {
-      flex: 1;
-    }
-
-    /* Scanned Result Display */
-    .scan-result {
-      background: var(--success-bg);
-      border: 1px solid var(--success-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-md);
-      margin-bottom: var(--space-md);
-      display: none;
-    }
-
-    .scan-result.show {
-      display: block;
-      animation: slideUp 0.3s ease;
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .scan-result-header {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      margin-bottom: var(--space-sm);
-    }
-
-    .scan-result-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--success);
-      color: white;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-    }
-
-    .scan-result-title {
-      font-weight: 600;
-      color: var(--success);
-    }
-
-    .scan-result-data {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      background: var(--bg-card);
-      padding: var(--space-sm);
-      border-radius: var(--radius-sm);
-      word-break: break-all;
-    }
-
-    /* Manual Entry Section */
-    .manual-entry {
-      margin-top: var(--space-md);
-    }
-
-    .manual-entry-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: var(--space-sm);
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    /* ========================================
-       HISTORY PAGE
-       ======================================== */
-    .search-bar {
-      display: flex;
-      gap: var(--space-sm);
-      margin-bottom: var(--space-md);
-    }
-
-    .search-input {
-      flex: 1;
-      padding: var(--space-sm) var(--space-md);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-full);
-      font-size: 0.9rem;
-      background: var(--bg-card);
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--accent-primary);
-    }
-
-    .filter-tabs {
-      display: flex;
-      gap: var(--space-xs);
-      margin-bottom: var(--space-md);
-      overflow-x: auto;
-      padding-bottom: var(--space-xs);
-    }
-
-    .filter-tab {
-      padding: var(--space-xs) var(--space-md);
-      border-radius: var(--radius-full);
-      font-size: 0.75rem;
-      font-weight: 600;
-      border: 1px solid var(--border-default);
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .filter-tab.active {
-      background: var(--accent-primary);
-      border-color: var(--accent-primary);
-      color: white;
-    }
-
-    /* History Item */
-    .history-item {
+    .item-card {
       background: var(--bg-card);
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border-light);
-      padding: var(--space-md);
-      margin-bottom: var(--space-sm);
+      padding: 14px;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
       position: relative;
-      transition: all var(--transition-fast);
+      overflow: hidden;
     }
 
-    .history-item.expired {
-      border-left: 4px solid var(--danger);
+    .item-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
     }
 
-    .history-item.expired .item-name {
-      text-decoration: line-through;
-      color: var(--danger);
-    }
+    .item-card.expired::before { background: var(--expired); }
+    .item-card.expiring::before { background: var(--expiring); }
+    .item-card.ok::before { background: var(--ok); }
 
-    .history-item.expiring {
-      border-left: 4px solid var(--warning);
-    }
-
-    .history-item.ok {
-      border-left: 4px solid var(--success);
+    .item-card:active {
+      transform: scale(0.99);
+      background: var(--bg-card-hover);
     }
 
     .item-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: var(--space-sm);
+      margin-bottom: 8px;
     }
 
     .item-name {
+      font-size: 14px;
       font-weight: 600;
-      font-size: 0.95rem;
       color: var(--text-primary);
       flex: 1;
-      margin-right: var(--space-sm);
+      margin-right: 8px;
+      line-height: 1.3;
     }
 
-    .item-qty {
-      background: var(--accent-primary);
-      color: white;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      font-size: 0.7rem;
+    .item-expiry-badge {
+      font-size: 12px;
       font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .item-card.expired .item-expiry-badge {
+      background: rgba(255, 23, 68, 0.2);
+      color: var(--expired);
+    }
+
+    .item-card.expiring .item-expiry-badge {
+      background: rgba(255, 145, 0, 0.2);
+      color: var(--expiring);
+    }
+
+    .item-card.ok .item-expiry-badge {
+      background: rgba(0, 230, 118, 0.2);
+      color: var(--ok);
     }
 
     .item-details {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-xs);
-      font-size: 0.75rem;
+      gap: 6px;
+      font-size: 12px;
     }
 
     .item-detail {
       display: flex;
-      gap: var(--space-xs);
+      align-items: center;
+      gap: 4px;
     }
 
     .item-detail-label {
@@ -863,391 +558,256 @@
 
     .item-detail-value {
       color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-weight: 500;
-    }
-
-    .item-expiry {
-      padding: 2px 8px;
-      border-radius: var(--radius-sm);
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    .item-expiry.expired {
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    .item-expiry.expiring {
-      background: var(--warning-bg);
-      color: var(--warning);
-    }
-
-    .item-expiry.ok {
-      background: var(--success-bg);
-      color: var(--success);
+      font-family: 'SF Mono', monospace;
     }
 
     .item-actions {
       display: flex;
-      gap: var(--space-xs);
-      margin-top: var(--space-sm);
-      padding-top: var(--space-sm);
-      border-top: 1px solid var(--border-light);
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
     }
 
     .item-action-btn {
-      padding: var(--space-xs) var(--space-sm);
+      flex: 1;
+      padding: 8px;
+      border: none;
       border-radius: var(--radius-sm);
-      font-size: 0.7rem;
-      font-weight: 600;
-      border: 1px solid var(--border-default);
-      background: var(--bg-surface);
-      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
       cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
 
-    .item-action-btn:active {
-      background: var(--bg-elevated);
+    .item-action-btn.edit {
+      background: rgba(0, 188, 212, 0.2);
+      color: var(--primary);
     }
 
     .item-action-btn.delete {
+      background: rgba(255, 82, 82, 0.2);
       color: var(--danger);
-      border-color: var(--danger-border);
     }
 
-    /* Unknown Product - needs name update */
-    .history-item.unknown-product {
-      border: 2px dashed var(--warning);
-      background: var(--yellow-light);
+    .item-action-btn:active {
+      transform: scale(0.95);
     }
 
-    .item-name.needs-update {
-      color: var(--warning);
-      font-style: italic;
-    }
-
-    .item-action-btn.highlight {
-      background: var(--warning);
-      color: white;
-      border-color: var(--warning);
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    /* Empty State */
+    /* ========== EMPTY STATE ========== */
     .empty-state {
       text-align: center;
-      padding: var(--space-2xl);
-      color: var(--text-muted);
+      padding: 40px 20px;
     }
 
-    .empty-state-icon {
-      font-size: 3rem;
-      margin-bottom: var(--space-md);
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
     }
 
-    .empty-state-title {
-      font-size: 1rem;
+    .empty-title {
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: var(--space-sm);
-    }
-
-    /* ========================================
-       PASTE PAGE (Manual Entry)
-       ======================================== */
-    .paste-info {
-      background: var(--blue-light);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      margin-bottom: var(--space-md);
-    }
-
-    .paste-info-title {
-      font-weight: 600;
-      color: var(--blue);
-      margin-bottom: var(--space-xs);
-    }
-
-    .paste-info-text {
-      font-size: 0.8rem;
       color: var(--text-secondary);
+      margin-bottom: 4px;
     }
 
-    /* ========================================
-       MASTER/SETTINGS PAGE
-       ======================================== */
-    .settings-section {
-      margin-bottom: var(--space-lg);
-    }
-
-    .settings-title {
-      font-size: 0.8rem;
-      font-weight: 600;
+    .empty-text {
+      font-size: 13px;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: var(--space-sm);
     }
 
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-      padding: var(--space-md);
+    /* ========== BOTTOM NAV ========== */
+    .bottom-nav {
       background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      padding: 8px 16px;
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 16px;
       border-radius: var(--radius-md);
-      margin-bottom: var(--space-xs);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 10px;
       cursor: pointer;
-      border: 1px solid var(--border-light);
-      transition: all var(--transition-fast);
+      transition: var(--transition);
+      gap: 4px;
     }
 
-    .menu-item:active {
-      background: var(--bg-surface);
+    .nav-item-icon {
+      font-size: 22px;
     }
 
-    .menu-item-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
+    .nav-item.active {
+      color: var(--primary);
+      background: rgba(0, 188, 212, 0.1);
+    }
+
+    .nav-item:active {
+      transform: scale(0.95);
+    }
+
+    /* ========== PAGES ========== */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
-      background: var(--bg-surface);
-      color: var(--text-secondary);
-    }
-
-    .menu-item-icon.coral { background: var(--coral-light); color: var(--coral); }
-    .menu-item-icon.teal { background: var(--teal-light); color: var(--teal); }
-    .menu-item-icon.yellow { background: var(--yellow-light); color: var(--yellow); }
-    .menu-item-icon.blue { background: var(--blue-light); color: var(--blue); }
-    .menu-item-icon.danger { background: var(--danger-bg); color: var(--danger); }
-
-    .menu-item-content {
-      flex: 1;
-    }
-
-    .menu-item-title {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-primary);
-    }
-
-    .menu-item-subtitle {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .menu-item-arrow {
-      color: var(--text-muted);
-    }
-
-    .menu-item.danger .menu-item-title {
-      color: var(--danger);
-    }
-
-    /* Master Data Stats */
-    .master-stats {
-      display: flex;
-      gap: var(--space-md);
-      padding: var(--space-md);
-      background: var(--teal-light);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-md);
-    }
-
-    .master-stat {
-      text-align: center;
-      flex: 1;
-    }
-
-    .master-stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--teal-dark);
-    }
-
-    .master-stat-label {
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-    }
-
-    /* ========================================
-       TOAST NOTIFICATIONS
-       ======================================== */
-    .toast-container {
-      position: fixed;
-      top: calc(var(--header-height) + var(--safe-top) + var(--space-md));
-      left: 50%;
-      transform: translateX(-50%);
+      padding: 20px;
       z-index: 1000;
-      width: calc(100% - var(--space-lg));
-      max-width: 400px;
-      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
     }
 
-    .toast {
-      background: var(--text-primary);
-      color: white;
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-sm);
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      animation: toastIn 0.3s ease;
-      box-shadow: var(--shadow-lg);
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
     }
 
-    .toast.success {
-      background: var(--success);
-    }
-
-    .toast.error {
-      background: var(--danger);
-    }
-
-    .toast.warning {
-      background: var(--warning);
-    }
-
-    @keyframes toastIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ========================================
-       LOADING
-       ======================================== */
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.9);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    .loading-overlay.show {
-      display: flex;
-    }
-
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid var(--border-default);
-      border-top-color: var(--accent-primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ========================================
-       EDIT MODAL
-       ======================================== */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1500;
-      padding: var(--space-md);
-    }
-
-    .modal-backdrop.show {
-      display: flex;
-    }
-
-    .modal-content {
+    .modal {
       background: var(--bg-card);
       border-radius: var(--radius-xl);
       width: 100%;
-      max-width: 360px;
-      padding: var(--space-lg);
-      animation: modalIn 0.2s ease;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: scale(0.9) translateY(20px);
+      transition: var(--transition);
     }
 
-    @keyframes modalIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    .modal-overlay.show .modal {
+      transform: scale(1) translateY(0);
     }
 
     .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: var(--space-md);
     }
 
     .modal-title {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 600;
     }
 
     .modal-close {
       width: 32px;
       height: 32px;
       border: none;
-      background: var(--bg-surface);
-      border-radius: var(--radius-sm);
-      font-size: 1.2rem;
+      background: var(--bg-input);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      font-size: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .modal-actions {
+    .modal-body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      font-size: 15px;
+      color: var(--text-primary);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+    }
+
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border-color);
       display: flex;
-      gap: var(--space-sm);
-      margin-top: var(--space-lg);
+      gap: 12px;
     }
 
-    .modal-actions .btn {
+    .btn {
       flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
     }
 
-    /* Hidden file inputs */
-    .hidden-input {
-      display: none;
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #000;
     }
 
-    /* Footer */
-    .app-footer {
-      text-align: center;
-      padding: var(--space-lg);
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-
-    .app-footer strong {
+    .btn-secondary {
+      background: var(--bg-input);
       color: var(--text-secondary);
     }
 
-    /* Side Menu */
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* ========== SIDE MENU ========== */
     .menu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 200;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
       opacity: 0;
       visibility: hidden;
-      transition: all var(--transition-default);
+      transition: var(--transition);
     }
 
     .menu-overlay.show {
@@ -1258,394 +818,627 @@
     .side-menu {
       position: fixed;
       top: 0;
-      right: -300px;
+      right: 0;
+      bottom: 0;
       width: 280px;
-      height: 100%;
       background: var(--bg-card);
-      z-index: 201;
-      transition: right var(--transition-default);
-      padding: var(--space-lg);
-      padding-top: calc(var(--safe-top) + var(--space-lg));
-      overflow-y: auto;
+      z-index: 1000;
+      transform: translateX(100%);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
     }
 
     .side-menu.show {
-      right: 0;
+      transform: translateX(0);
     }
 
-    .side-menu-header {
+    .menu-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: var(--space-lg);
-      padding-bottom: var(--space-md);
-      border-bottom: 1px solid var(--border-light);
     }
 
-    .side-menu-title {
-      font-size: 1.1rem;
-      font-weight: 700;
+    .menu-title {
+      font-size: 16px;
+      font-weight: 600;
     }
 
-    .side-menu-close {
-      width: 36px;
-      height: 36px;
-      border: none;
-      background: var(--bg-surface);
+    .menu-items {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
       border-radius: var(--radius-md);
-      font-size: 1.2rem;
+      color: var(--text-primary);
+      font-size: 14px;
       cursor: pointer;
+      transition: var(--transition);
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
     }
+
+    .menu-item:active {
+      background: var(--bg-input);
+    }
+
+    .menu-item-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .menu-divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 8px 0;
+    }
+
+    .menu-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .menu-version {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ========== TOAST ========== */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 20px;
+      font-size: 14px;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-lg);
+      animation: toastIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.success { border-color: var(--success); }
+    .toast.error { border-color: var(--danger); }
+    .toast.warning { border-color: var(--warning); }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== LOADING ========== */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .loading-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========== SETTINGS PAGE ========== */
+    .settings-section {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 4px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .settings-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .settings-item:active {
+      background: var(--bg-input);
+    }
+
+    .settings-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .settings-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-input);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .settings-item-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .settings-item-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .settings-item-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .settings-item-arrow {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    /* ========== HISTORY PAGE ========== */
+    .search-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      background: none;
+      border: none;
+      font-size: 15px;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-tab {
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .filter-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #000;
+    }
+
+    /* ========== MASTER DATA PAGE ========== */
+    .master-stats {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .master-count {
+      font-size: 48px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .master-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 4px;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .action-btn {
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn:active {
+      transform: scale(0.98);
+      background: var(--bg-card-hover);
+    }
+
+    .action-btn-icon {
+      font-size: 24px;
+    }
+
+    /* ========== UTILITIES ========== */
+    .hidden { display: none !important; }
+    .text-center { text-align: center; }
+    .mt-2 { margin-top: 8px; }
+    .mt-4 { margin-top: 16px; }
   </style>
 </head>
 <body>
-  <div class="app-container">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="logo">
-        <div class="logo-icon"><img src="boots-logo.png" alt="Boots" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"></div>
-        <div class="logo-text">
-          <span class="logo-name">BOOTS PHARMACY</span>
-          <span class="logo-branch">Oasis Mall Branch - Backwall Tracker</span>
-        </div>
+  <!-- SPLASH SCREEN -->
+  <div id="splashScreen">
+    <div class="splash-logo">
+      <div class="splash-pill">💊</div>
+    </div>
+    <div class="splash-title">EXPIRY TRACKER</div>
+    <div class="splash-tagline">With you. For Life.</div>
+    <div class="splash-brand">AI startup by <span>VYSAKH</span></div>
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-left">
+        <div class="header-logo">💊</div>
+        <span class="header-title">Expiry Tracker</span>
       </div>
       <div class="header-actions">
-        <span class="online-status online" id="onlineStatus">● Online</span>
         <button class="header-btn" id="btnMenu">☰</button>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="app-main">
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
       <!-- HOME PAGE -->
-      <div class="page active" id="page-home">
-        <div class="hero">
-          <div class="hero-icon">📦</div>
-          <h1 class="hero-title">Backwall Tracker</h1>
-          <p class="hero-subtitle">Scan barcode and manual entry for expiry tracking</p>
-        </div>
-
-        <div class="quick-actions">
-          <div class="quick-action" data-page="scan">
-            <div class="quick-action-icon coral">📷</div>
-            <span class="quick-action-label">Scan Barcode</span>
+      <div id="page-home" class="page active">
+        <!-- Manual Input -->
+        <div class="input-section">
+          <div class="input-section-title">
+            <span>📝</span> Manual Barcode Entry
           </div>
-          <div class="quick-action" data-page="paste">
-            <div class="quick-action-icon teal">⌨️</div>
-            <span class="quick-action-label">Manual Entry</span>
+          <div class="barcode-input-wrapper">
+            <input 
+              type="text" 
+              id="barcodeInput" 
+              class="barcode-input" 
+              placeholder="Paste or type GS1 barcode here..."
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+            >
           </div>
-          <div class="quick-action" data-page="history">
-            <div class="quick-action-icon yellow">📋</div>
-            <span class="quick-action-label">View History</span>
-          </div>
-          <div class="quick-action" data-page="master">
-            <div class="quick-action-icon blue">⚙️</div>
-            <span class="quick-action-label">Settings</span>
+          <div class="input-hint">
+            <span>💡</span> Auto-processes on Enter or paste
           </div>
         </div>
 
-        <div class="stats-row">
-          <div class="stat-item">
-            <div class="stat-value" id="statTotal">0</div>
-            <div class="stat-label">Total Items</div>
+        <!-- Scanner -->
+        <div class="scanner-section">
+          <button class="scanner-toggle" id="btnScanner">
+            <span>📷</span> Open Camera Scanner
+          </button>
+          <div id="scannerContainer">
+            <div id="reader"></div>
           </div>
-          <div class="stat-item">
-            <div class="stat-value" id="statExpiring" style="color: var(--warning);">0</div>
-            <div class="stat-label">Expiring Soon</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="statExpired" style="color: var(--danger);">0</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card expired" onclick="filterItems('expired')">
+            <div class="stat-value" id="statExpired">0</div>
             <div class="stat-label">Expired</div>
           </div>
+          <div class="stat-card expiring" onclick="filterItems('expiring')">
+            <div class="stat-value" id="statExpiring">0</div>
+            <div class="stat-label">Expiring</div>
+          </div>
+          <div class="stat-card ok" onclick="filterItems('ok')">
+            <div class="stat-value" id="statOk">0</div>
+            <div class="stat-label">OK</div>
+          </div>
         </div>
 
+        <!-- Recent Items -->
         <div class="section-header">
-          <span class="section-title">Recent Scans</span>
-          <span class="section-link" data-page="history">View All →</span>
+          <div class="section-title">
+            <span>📋</span> Recent Scans
+          </div>
+          <button class="section-action" onclick="showPage('history')">View All →</button>
         </div>
-        <div id="recentItems"></div>
-
-        <div class="app-footer">
-          <p>Made by <strong>Vysakh Chandran</strong></p>
-        </div>
-      </div>
-
-      <!-- SCAN PAGE -->
-      <div class="page" id="page-scan">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">📷 Barcode Scanner</span>
-          </div>
-          
-          <div class="scanner-container" id="scannerContainer">
-            <div id="reader"></div>
-            <div class="scanner-overlay" id="scannerOverlay">
-              <div class="scanner-frame"></div>
-              <span class="scanner-hint">Position barcode in frame</span>
-            </div>
-          </div>
-
-          <div class="scanner-controls">
-            <button class="btn btn-primary" id="btnStartScanner">▶️ Start Scanner</button>
-            <button class="btn btn-secondary btn-icon" id="btnSwitchCamera" title="Switch Camera">🔄</button>
-            <button class="btn btn-secondary btn-icon" id="btnUploadImage" title="Upload Image">🖼️</button>
-          </div>
-
-          <!-- Scan Result Display -->
-          <div class="scan-result" id="scanResult">
-            <div class="scan-result-header">
-              <div class="scan-result-icon">✓</div>
-              <span class="scan-result-title">Barcode Detected!</span>
-            </div>
-            <div class="scan-result-data" id="scanResultData"></div>
-          </div>
-
-          <!-- Manual Entry Below Scanner -->
-          <div class="manual-entry">
-            <div class="manual-entry-title">
-              <span>⌨️ Manual / Scanned Data</span>
-            </div>
-            <div class="form-group">
-              <textarea class="form-textarea" id="scanManualInput" placeholder="Scanned barcode will appear here...&#10;Or paste/type GS1 data manually&#10;&#10;Example:&#10;01095011015300031714013110K24P001"></textarea>
-            </div>
-            <button class="btn btn-primary btn-large" id="btnProcessManual">Process Data</button>
+        <div class="items-list" id="recentItems">
+          <div class="empty-state">
+            <div class="empty-icon">📦</div>
+            <div class="empty-title">No items yet</div>
+            <div class="empty-text">Scan or paste a barcode to start</div>
           </div>
         </div>
       </div>
 
       <!-- HISTORY PAGE -->
-      <div class="page" id="page-history">
+      <div id="page-history" class="page">
         <div class="search-bar">
-          <input type="text" class="search-input" id="searchHistory" placeholder="🔍 Search products...">
+          <span>🔍</span>
+          <input type="text" id="searchInput" placeholder="Search products...">
         </div>
-
         <div class="filter-tabs">
           <button class="filter-tab active" data-filter="all">All</button>
           <button class="filter-tab" data-filter="expired">Expired</button>
           <button class="filter-tab" data-filter="expiring">Expiring</button>
           <button class="filter-tab" data-filter="ok">OK</button>
         </div>
-
-        <div id="historyList"></div>
+        <div class="items-list" id="historyList"></div>
       </div>
 
-      <!-- PASTE PAGE (Manual Entry) -->
-      <div class="page" id="page-paste">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">⌨️ Manual Entry</span>
-          </div>
-
-          <div class="paste-info">
-            <div class="paste-info-title">💡 Tip</div>
-            <div class="paste-info-text">
-              Paste multiple barcodes, one per line. Supports GS1, EAN-13, GTIN-14, and plain barcodes.
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Paste Barcode Data</label>
-            <textarea class="form-textarea" id="pasteInput" rows="8" placeholder="Paste barcodes here...&#10;One per line&#10;&#10;Example:&#10;01095011015300031714013110K24P001&#10;5000167393170&#10;6297000001234"></textarea>
-          </div>
-
-          <button class="btn btn-primary btn-large" id="btnProcessPaste">
-            ⚡ Process All
-          </button>
-        </div>
-      </div>
-
-      <!-- MASTER/SETTINGS PAGE -->
-      <div class="page" id="page-master">
+      <!-- SETTINGS PAGE -->
+      <div id="page-settings" class="page">
         <div class="master-stats">
-          <div class="master-stat">
-            <div class="master-stat-value" id="masterCount">0</div>
-            <div class="master-stat-label">Products in Database</div>
+          <div class="master-count" id="masterCount">0</div>
+          <div class="master-label">Products in Database</div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-item" onclick="document.getElementById('fileMaster').click()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">📤</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Upload Master Data</div>
+                <div class="settings-item-desc">Replace product database</div>
+              </div>
+            </div>
+            <div class="settings-item-arrow">›</div>
+          </div>
+          <div class="settings-item" onclick="document.getElementById('fileAppend').click()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">➕</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Append Master Data</div>
+                <div class="settings-item-desc">Add to existing database</div>
+              </div>
+            </div>
+            <div class="settings-item-arrow">›</div>
           </div>
         </div>
 
         <div class="settings-section">
-          <div class="settings-title">Master Data</div>
-          
-          <div class="menu-item" id="btnUploadMaster">
-            <div class="menu-item-icon teal">📤</div>
-            <div class="menu-item-content">
-              <div class="menu-item-title">Upload Master File</div>
-              <div class="menu-item-subtitle">Replace entire product database</div>
+          <div class="settings-item" onclick="exportData()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">📊</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Export Data</div>
+                <div class="settings-item-desc">Download CSV report</div>
+              </div>
             </div>
-            <span class="menu-item-arrow">→</span>
+            <div class="settings-item-arrow">›</div>
           </div>
-
-          <div class="menu-item" id="btnAppendMaster">
-            <div class="menu-item-icon blue">➕</div>
-            <div class="menu-item-content">
-              <div class="menu-item-title">Append to Master</div>
-              <div class="menu-item-subtitle">Add new products without removing existing</div>
+          <div class="settings-item" onclick="downloadBackup()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">💾</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Backup</div>
+                <div class="settings-item-desc">Save all data</div>
+              </div>
             </div>
-            <span class="menu-item-arrow">→</span>
+            <div class="settings-item-arrow">›</div>
           </div>
-        </div>
-
-        <div class="settings-section">
-          <div class="settings-title">Export Data</div>
-          
-          <div class="menu-item" id="btnExportCSV">
-            <div class="menu-item-icon coral">📊</div>
-            <div class="menu-item-content">
-              <div class="menu-item-title">Export History (CSV)</div>
-              <div class="menu-item-subtitle">Download scan history as CSV file</div>
+          <div class="settings-item" onclick="document.getElementById('fileRestore').click()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">📥</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Restore Backup</div>
+                <div class="settings-item-desc">Load saved data</div>
+              </div>
             </div>
-            <span class="menu-item-arrow">→</span>
+            <div class="settings-item-arrow">›</div>
           </div>
         </div>
 
         <div class="settings-section">
-          <div class="settings-title">Backup & Restore</div>
-          
-          <div class="menu-item" id="btnBackup">
-            <div class="menu-item-icon yellow">💾</div>
-            <div class="menu-item-content">
-              <div class="menu-item-title">Download Backup</div>
-              <div class="menu-item-subtitle">Save all data as JSON file</div>
+          <div class="settings-item" onclick="clearHistory()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">🗑️</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Clear History</div>
+                <div class="settings-item-desc">Remove all scanned items</div>
+              </div>
             </div>
-            <span class="menu-item-arrow">→</span>
+            <div class="settings-item-arrow">›</div>
           </div>
-
-          <div class="menu-item" id="btnRestore">
-            <div class="menu-item-icon blue">📥</div>
-            <div class="menu-item-content">
-              <div class="menu-item-title">Restore Backup</div>
-              <div class="menu-item-subtitle">Load data from backup file</div>
+          <div class="settings-item" onclick="resetMaster()">
+            <div class="settings-item-left">
+              <div class="settings-item-icon">🔄</div>
+              <div class="settings-item-text">
+                <div class="settings-item-title">Reset Master Data</div>
+                <div class="settings-item-desc">Clear product database</div>
+              </div>
             </div>
-            <span class="menu-item-arrow">→</span>
+            <div class="settings-item-arrow">›</div>
           </div>
-        </div>
-
-        <div class="settings-section">
-          <div class="settings-title">Danger Zone</div>
-          
-          <div class="menu-item danger" id="btnClearHistory">
-            <div class="menu-item-icon danger">🗑️</div>
-            <div class="menu-item-content">
-              <div class="menu-item-title">Clear All History</div>
-              <div class="menu-item-subtitle">This cannot be undone</div>
-            </div>
-            <span class="menu-item-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="app-footer">
-          <p>Version 4.0.0</p>
-          <p>Made by <strong>Vysakh Chandran</strong></p>
         </div>
       </div>
     </main>
 
-    <!-- Bottom Navigation -->
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
       <button class="nav-item active" data-page="home">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-label">Home</span>
-      </button>
-      <button class="nav-item" data-page="scan">
-        <span class="nav-icon">📷</span>
-        <span class="nav-label">Scan</span>
+        <span class="nav-item-icon">🏠</span>
+        <span>Home</span>
       </button>
       <button class="nav-item" data-page="history">
-        <span class="nav-icon">📋</span>
-        <span class="nav-label">History</span>
+        <span class="nav-item-icon">📋</span>
+        <span>History</span>
       </button>
-      <button class="nav-item" data-page="paste">
-        <span class="nav-icon">⌨️</span>
-        <span class="nav-label">Manual</span>
-      </button>
-      <button class="nav-item" data-page="master">
-        <span class="nav-icon">⚙️</span>
-        <span class="nav-label">Settings</span>
+      <button class="nav-item" data-page="settings">
+        <span class="nav-item-icon">⚙️</span>
+        <span>Settings</span>
       </button>
     </nav>
   </div>
 
-  <!-- Toast Container -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Edit Modal -->
-  <div class="modal-backdrop" id="editModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">✏️ Edit Item</h3>
-        <button class="modal-close" id="closeEditModal">×</button>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Product Name</label>
-        <input type="text" class="form-input" id="editName" placeholder="Enter product name">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Quantity</label>
-        <input type="number" class="form-input" id="editQty" min="1" value="1">
-      </div>
-      <div class="form-group">
-        <label class="form-label">RMS Code (Optional)</label>
-        <input type="text" class="form-input" id="editRms" placeholder="RMS code...">
-      </div>
-      <input type="hidden" id="editItemId">
-      <div class="modal-actions">
-        <button class="btn btn-secondary" id="cancelEdit">Cancel</button>
-        <button class="btn btn-primary" id="saveEdit">Save Changes</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Side Menu -->
+  <!-- SIDE MENU -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <div class="side-menu" id="sideMenu">
-    <div class="side-menu-header">
-      <span class="side-menu-title">Menu</span>
-      <button class="side-menu-close" id="closeSideMenu">×</button>
+    <div class="menu-header">
+      <span class="menu-title">Menu</span>
+      <button class="modal-close" onclick="closeMenu()">×</button>
     </div>
-    
-    <div class="settings-section">
-      <div class="settings-title">Quick Actions</div>
-      <div class="menu-item" data-page="scan">
-        <div class="menu-item-icon coral">📷</div>
-        <div class="menu-item-content">
-          <div class="menu-item-title">Scan Barcode</div>
-        </div>
-      </div>
-      <div class="menu-item" data-page="paste">
-        <div class="menu-item-icon teal">⌨️</div>
-        <div class="menu-item-content">
-          <div class="menu-item-title">Manual Entry</div>
-        </div>
-      </div>
+    <div class="menu-items">
+      <button class="menu-item" onclick="exportData(); closeMenu();">
+        <span class="menu-item-icon">📊</span>
+        <span>Export CSV</span>
+      </button>
+      <button class="menu-item" onclick="downloadBackup(); closeMenu();">
+        <span class="menu-item-icon">💾</span>
+        <span>Download Backup</span>
+      </button>
+      <div class="menu-divider"></div>
+      <button class="menu-item" onclick="showPage('settings'); closeMenu();">
+        <span class="menu-item-icon">⚙️</span>
+        <span>Settings</span>
+      </button>
     </div>
+    <div class="menu-footer">
+      <div class="menu-version">Expiry Tracker v5.0.0</div>
+      <div class="menu-version">AI startup by VYSAKH</div>
+    </div>
+  </div>
 
-    <div class="settings-section">
-      <div class="settings-title">Data</div>
-      <div class="menu-item" id="menuExport">
-        <div class="menu-item-icon coral">📊</div>
-        <div class="menu-item-content">
-          <div class="menu-item-title">Export CSV</div>
+  <!-- EDIT MODAL -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Edit Item</span>
+        <button class="modal-close" onclick="closeEditModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editId">
+        <div class="form-group">
+          <label class="form-label">Product Name</label>
+          <input type="text" id="editName" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Expiry Date</label>
+          <input type="date" id="editExpiry" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Batch Number</label>
+          <input type="text" id="editBatch" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quantity</label>
+          <input type="number" id="editQty" class="form-input" min="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">RMS Code</label>
+          <input type="text" id="editRms" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Supplier</label>
+          <input type="text" id="editSupplier" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Returnable</label>
+          <select id="editReturnable" class="form-input">
+            <option value="">Not specified</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
         </div>
       </div>
-      <div class="menu-item" id="menuBackup">
-        <div class="menu-item-icon yellow">💾</div>
-        <div class="menu-item-content">
-          <div class="menu-item-title">Backup</div>
-        </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveEdit()">Save</button>
       </div>
     </div>
   </div>
 
-  <!-- Hidden File Inputs -->
-  <input type="file" class="hidden-input" id="fileInputMaster" accept=".csv,.tsv,.txt,.xlsx,.xls">
-  <input type="file" class="hidden-input" id="fileInputAppend" accept=".csv,.tsv,.txt,.xlsx,.xls">
-  <input type="file" class="hidden-input" id="fileInputRestore" accept=".json">
-  <input type="file" class="hidden-input" id="fileInputImage" accept="image/*">
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- HIDDEN FILE INPUTS -->
+  <input type="file" id="fileMaster" accept=".csv,.txt" style="display:none">
+  <input type="file" id="fileAppend" accept=".csv,.txt" style="display:none">
+  <input type="file" id="fileRestore" accept=".json" style="display:none">
 
   <script src="app.js"></script>
 </body>
