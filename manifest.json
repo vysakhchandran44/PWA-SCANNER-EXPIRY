@@ -1,75 +1,20 @@
 {
-  "name": "Pharmacy Tracker - Expiry Manager",
-  "short_name": "Pharmacy Tracker",
-  "description": "Track pharmacy stock expiry dates with barcode scanning",
+  "name": "Expiry Tracker",
+  "short_name": "Expiry",
+  "description": "Medicine expiry date tracker with GS1 barcode support",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F8FAFC",
-  "theme_color": "#FFFFFF",
-  "orientation": "portrait-primary",
-  "categories": ["medical", "health", "productivity"],
+  "background_color": "#0a0a0a",
+  "theme_color": "#00bcd4",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%2300bcd4'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='white'>💊</text></svg>",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ],
-  "shortcuts": [
-    {
-      "name": "Scan Barcode",
-      "short_name": "Scan",
-      "url": "/?action=scan",
-      "icons": [{ "src": "icon-96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "View History",
-      "short_name": "History",
-      "url": "/?action=history",
-      "icons": [{ "src": "icon-96.png", "sizes": "96x96" }]
-    }
-  ]
+  "categories": ["medical", "utilities", "productivity"],
+  "lang": "en"
 }

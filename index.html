@@ -1443,3 +1443,29 @@
   <script src="app.js"></script>
 </body>
 </html>
+<style>
+/* API Match Badge */
+.item-card.api::before { background: #a78bfa; }
+.item-card.api .item-expiry-badge {
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+/* API indicator in details */
+.match-api {
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+/* Loading indicator for API calls */
+.api-loading {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+</style>
